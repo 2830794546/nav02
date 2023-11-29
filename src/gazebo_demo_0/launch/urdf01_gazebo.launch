@@ -1,0 +1,13 @@
+<launch>
+     <!-- 将 Urdf 文件的内容加载到参数服务器 -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find gazebo_demo_0)/urdf/xacro/base_car.urdf.xacro"/>
+    <!-- 启动 gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+        <arg name="world_name" value="$(find gazebo_demo_0)/worlds/box_house.world"/>
+    </include>
+    <!-- 在 gazebo 中显示机器人模型 -->
+    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model my_car_camera -param robot_description"/>
+    <node pkg="gazebo_demo_0" type="scan_2_point_cloud.py" name="laser2PointCloud"/>
+    <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher"/>
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

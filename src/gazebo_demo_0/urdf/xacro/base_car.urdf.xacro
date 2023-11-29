@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<robot name="smart_car_v0" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:arg name="car_name"   default="car0" />
+    <xacro:arg name="car_namespace"   default="A" />
+    <xacro:include filename="my_head.urdf.xacro" />
+
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find gazebo_demo_0)/urdf/xacro/my_base.urdf.xacro" />
+    <xacro:include filename="$(find gazebo_demo_0)/urdf/xacro/base_drive.gazebo" />
+
+    <xacro:include filename="my_laser.urdf.xacro" />
+    <xacro:include filename="my_camera.urdf.xacro" />
+
+
+     <!-- 雷达仿真的 xacro 文件 -->
+    <xacro:include filename="sensors.xacro" />
+     <!-- 摄像头仿真的 xacro 文件 -->
+    <xacro:include filename="camera.xacro" />
+
+    <xacro:base_mecanum_gazebo/>
+</robot>

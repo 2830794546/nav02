@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<robot name="base_mecanum_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+
+    <xacro:macro name="base_mecanum_gazebo">
+        <!-- <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>$(arg car_namespace)/$(arg car_name)</robotNamespace>
+                <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            </plugin>
+        </gazebo> -->
+
+        <gazebo reference="base_footprint">
+            <material>Gazebo/Black</material>
+        </gazebo>
+
+        <!-- <gazebo reference="base_link">
+            <material>Gazebo/Black</material>
+        </gazebo> -->
+
+        <gazebo reference="link_left_front">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+            <kp>2000000.0</kp>
+            <ki>2000.0</ki>            
+            <kd>0.0</kd>
+            <minDepth>0.1</minDepth>
+            <maxVel>10.0</maxVel>
+        </gazebo>
+
+        <gazebo reference="link_left_back">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+            <kp>2000000.0</kp>
+            <ki>2000.0</ki>
+            <kd>0.0</kd>
+            <minDepth>0.1</minDepth>
+            <maxVel>10.0</maxVel>
+        </gazebo>
+
+        <gazebo reference="link_right_front">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+            <kp>2000000.0</kp>
+            <ki>2000.0</ki>
+            <kd>0.0</kd>
+            <minDepth>0.1</minDepth>
+            <maxVel>10.0</maxVel>
+        </gazebo>
+
+        <gazebo reference="link_right_back">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+            <kp>2000000.0</kp>
+            <ki>2000.0</ki>
+            <kd>0.0</kd>
+            <minDepth>0.1</minDepth>
+            <maxVel>10.0</maxVel>
+        </gazebo>
+    <!-- 麦轮控制器 -->
+    <gazebo>
+        <plugin name="mecanum_controller" filename="libgazebo_ros_planar_move.so">
+            <commandTopic>/cmd_vel</commandTopic>
+            <odometryTopic>/odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <leftFrontJoint>link_left_front</leftFrontJoint>
+            <rightFrontJoint>link_right_front</rightFrontJoint>
+            <leftRearJoint>link_left_back</leftRearJoint>
+            <rightRearJoint>link_right_back</rightRearJoint>
+            <odometryRate>50</odometryRate>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+            <broadcastTF>1</broadcastTF>
+        </plugin>
+    </gazebo>
+    </xacro:macro>
+</robot>
